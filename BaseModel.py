@@ -41,4 +41,5 @@ modelType = {
     "Linear": "线性模型",
     "BpRegression": "Bp神经网络回归",
     "BpClassification": "Bp神经网络分类",
+    "NaiveBayes": "朴素贝叶斯分类"
 }
