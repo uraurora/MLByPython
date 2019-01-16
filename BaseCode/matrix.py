@@ -324,15 +324,64 @@ class mat:
             raise TypeError, "必须是整数"
 
     @staticmethod
-    def dotk(k, matrix):
-        if not (isinstance(k, float) or isinstance(k, int)) and \
-                (isinstance(matrix, mat) or isinstance(matrix, list)):
-            raise TypeError("k不是常数或者matrix不是矩阵")
-        matrix = mat(matrix)
-        for i in range(matrix.row):
-            for j in range(matrix.col):
-                matrix.mat[i][j] = k * matrix.mat[i][j]
-        return mat(matrix.mat)
+    def uptriangulation(matrix):
+        m_chushi = copy.deepcopy(matrix)
+        row = len(m_chushi)
+        col = len(m_chushi[0])
+        # tflag为转置标志，为0时，原矩阵未转置，唯1时原矩阵被转置，输出时需要变回来
+        tflag = 0
+        if row >= col:
+            m = m_chushi
+        else:
+            m = mat(m_chushi).T.mat
+            row = len(m_chushi[0])
+            col = len(m_chushi)
+            tflag = 1
+        # 以行大于等于列的情况下初等变换
+        # 首先找出全为0的列
+        colallzero = []
+        for j in range(col):
+            i = 0
+            while i < row:
+                if m[i][j] != 0:
+                    break
+                i += 1
+            if i == row:
+                colallzero.append[j]
+        # 全为0的列初等变换移到最后，越靠前的越靠后
+        if len(colallzero) == col:
+            print("0矩阵变换你妈")
+        else:
+            i = 0
+            for j in range(col - 1, col - len(colallzero) - 1, -1):
+                if j in colallzero:
+                    continue
+                else:
+                    m = swap(m, colallzero[i], j, 1)
+                    i += 1
+        # 换列后初等变换
+        for j in range(col - len(colallzero)):
+            k = j
+            # 找到每一列第一个不为0的值
+            while k < row:
+                if m[k][j] != 0:
+                    break
+                k += 1
+            if k != row:
+                rowchange = m[k]
+                m[k] = m[j]
+                m[j] = rowchange
+                for i in range(j + 1, row):
+                    elfac = float(m[i][j] / m[j][j])
+                    for l in range(j, col - len(colallzero)):
+                        m[i][l] = m[i][l] - elfac * m[j][l]
+            else:
+                continue
+
+        if tflag == 0:
+            return m
+        else:
+            return mat(m).T.mat
 
     @staticmethod
     def norm_1(matrix):
@@ -468,6 +517,17 @@ def dot(matrix, other, *mat_else):
     else:
         raise Exception("矩阵A的列不等于矩阵B的行，乘不了的，小兄弟")
 
+def dotk(k, matrix):
+    '''常数乘矩阵'''
+    if not (isinstance(k, float) or isinstance(k, int)) and \
+            (isinstance(matrix, mat) or isinstance(matrix, list)):
+        raise TypeError("k不是常数或者matrix不是矩阵")
+    matrix = mat(matrix)
+    for i in range(matrix.row):
+        for j in range(matrix.col):
+            matrix.mat[i][j] = k * matrix.mat[i][j]
+    return mat(matrix.mat)
+
 def fillMat(shape, fill = 0):
     i, j = shape
     return mat([[fill] * j for i in range(i)])
@@ -530,6 +590,7 @@ def swap(matrix, i, j, RowOrCol):
         elif RowOrCol == 1:
             x[:][i], x[:][j] = x[:][j], x[:][i]
         return x
+
 
 
 
