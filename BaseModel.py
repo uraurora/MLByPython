@@ -29,7 +29,7 @@ class Model(object):
     def loadWeights(self):
         pass
 
-    def fitWeight(self):
+    def _fitWeight(self):
         pass
 
     def predict(self):
