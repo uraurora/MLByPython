@@ -9,6 +9,7 @@ from matrix import mat
 import math
 import random
 
+# region激活函数
 def sigmoid(x):
     return float(1.0)/(1 + math.exp(-x))
     # return 0.5 * (1 + math.tanh(0.5 * x))
@@ -17,14 +18,12 @@ def tanh(x):
     return math.tanh(x)
 
 def relu(x):
-    if x < 0:
-        return 0
-    else:
-        return x
+    return x
 
 funDict = {
     "sigmod": sigmoid,
     "tanh": tanh,
+    "relu": relu,
 }
 
 def sigmoidDiff(x):
@@ -44,10 +43,22 @@ def tanhDiff(x):
     '''
     return 1 - x ** 2
 
+def reluDiff(x):
+    return 1
 
 funDiffDict = {
     "sigmod": sigmoidDiff,
     "tanh": tanhDiff,
+    "relu": reluDiff,
 }
 
+# endregion
+
+
+# region统计函数
+# 高斯分布函数
+def Gaussian(u, o, x):
+    return float(math.exp(float(-(x - u)**2)/(2 * o**2)))/(math.sqrt(2*math.pi)*o)
+
+# endregion
 

@@ -21,6 +21,7 @@ except:
 class LinearRegression:
     @staticmethod
     def BridgeLinear(data_X, data_y, k=1, bias=False):
+        '''岭回归'''
         if not isinstance(data_X, list) or isinstance(data_X, mat):
             raise TypeError("X特征矩阵数据类型不符合标准，[○･｀Д´･ ○]")
         if not isinstance(data_y, list) or isinstance(data_y, mat):
@@ -39,7 +40,7 @@ class LinearRegression:
 class BPNN(Model):
     def __init__(self, ni, nh, no, active="tanh", iterations=5000, learnRate=0.01, B=0.02):
         # 调用父类赋值模型类型
-        super(BPNN, self).__init__(modelType["BpClassification"], iterations)
+        super(BPNN, self).__init__(modelType["BpRegression"], iterations)
         # self._type = modelType["BpClassification"]
         # 输入层，隐层和输出层的节点设置
         self.ni = ni
@@ -112,7 +113,7 @@ class BPNN(Model):
             self.ah[j] = self.active(sum([self.ai[i]*self.wi[i][j] for i in range(self.ni)]))
         # 计算输入层输出
         for k in range(self.no):
-            self.ao[k] = self.active(sum([self.ah[j]*self.wo[j][k] for j in range(self.nh)]))
+            self.ao[k] = sum([self.ah[j] * self.wo[j][k] for j in range(self.nh)])
         return self.ao
 
     def __back(self, output):
@@ -128,7 +129,7 @@ class BPNN(Model):
         for k in range(self.no):
             reo = self.ao[k]  # 实际输出
             eo = output[k]  # 期望输出
-            output_deltas[k] = (eo - reo) * self.activeDiff(reo)
+            output_deltas[k] = eo - reo
             Error += 0.5 * (eo - reo) ** 2  # 计算整体网络误差
         # 计算隐层误差
         hidden_deltas = [0.0] * self.nh
@@ -203,7 +204,7 @@ class BPNN(Model):
             try:
                 import numpy as np
                 ah = list(np.tanh(m.dot(data, mat(self.wi)).mat))
-                ao = np.tanh(m.dot(mat(ah), mat(self.wo)).mat)
+                ao = m.dot(mat(ah), mat(self.wo)).mat
                 return ao
             except:
                 raise Exception("测试用numpy库加载失败，o(╥﹏╥)o")
@@ -211,22 +212,22 @@ class BPNN(Model):
             xwi = m.dot(data, mat(self.wi)).mat
             ah = mat([list(map(self.active, i)) for i in xwi])
             xwiwo = m.dot(ah, mat(self.wo)).mat
-            ao = mat([list(map(self.active, i)) for i in xwiwo])
-            return ao
+            # ao = mat([list(map(self.active, i)) for i in xwiwo])
+            return xwiwo
 
 
 if __name__ == '__main__':
 
     # 先创建特征矩阵，默认规范化（数值在0-1之间）
-    data_X = m.random.rand((20, 6))
+    data_X = m.random.rand((100, 8))
     # data_X = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
 
     # 创建特征的标签向量
-    data_y = m.random.randint((20, 1), (0, 1))
+    data_y = m.random.randint((100, 1), (-5, 16))
     # data_y = [[0], [1], [0], [1], [1], [1], [1]]
 
     # 创建BP实例，输入矩阵列8， 隐含层矩阵列10， 输出层列1， 迭代次数5000， 梯度步长0.4， 修正参数0.2
-    nn = BPNN(6, 8, 1, active="tanh", iterations=5000, learnRate=0.01, B=0.02)
+    nn = BPNN(8, 6, 1, active="tanh", iterations=5000, learnRate=0.001, B=0.002)
     # 填充特征矩阵和标签， info表示是否显示迭代过程， show表示是否显示误差图像， bias偏置（为True，输入矩阵列需要加1）
     nn.fit(mat(data_X), mat(data_y), info=True, show=True, bias=False)
     # 存储权重矩阵，在weights文件夹下（需要pandas库）
@@ -234,7 +235,7 @@ if __name__ == '__main__':
     # 显示算法基本信息
     print(nn)
     # 进行预测，如果Debug为True，则用到了numpy，否则则是自己写的
-    print(nn.predict(m.random.rand((150, 6)), Debug=False))
+    print(nn.predict(m.random.rand((20, 8)), Debug=False))
 
 
 
