@@ -16,12 +16,71 @@ except:
     import pickle
 
 class NaiveBayes(Model):
-    def __init__(self, iterations):
+    def __init__(self, iterations=5000):
         # 调用父类构造函数，得到模型类型和迭代次数
         super(NaiveBayes, self).__init__(modelType["NaiveBayes"], iterations)
 
+    def __str__(self):
+        res = super(NaiveBayes, self).__str__()
+
+        return res
+
+    def fit(self, inputs, outputs, bias=False):
+        super(NaiveBayes, self).fit(inputs, outputs, bias)
+        # 标签的类别
+        self._class = list(set(map(tuple, self._outputs)))
+        self._class.sort(key=lambda x: x[0])
+        # 权重矩阵，行为标签集合长度，列为特征维度
+        self._weight = []
+
+        self.__train()
+
+    def __train(self):
+        '''标签的元组组合的列表'''
+        # 个数
+        self._labelNum = [(i, list(map(tuple, self._outputs)).count(i))
+                          for i in self._class]
+        # 分数
+        self._labelScore = [(self._class[i], self._labelNum[i][1] / float(self.irow))
+                            for i in range(len(self._labelNum))]
+        # 输入与标签的组合矩阵
+        mapX = copy.deepcopy(self._inputs)
+        for i in range(self.irow):
+            mapX[i].append(self._outputs[i])
+        newmapX = []
+        for i in self._labelNum:
+            temp = []
+            for j in range(self.irow):
+                if mapX[j][-1] == list(i[0]):
+                    temp.append(mapX[j])
+            newmapX.append(temp)
+
+        # 计算处理得到（均值，方差）的列表
+        for i in range(len(newmapX)):
+            temp = list(map(list, zip(*newmapX[i])))
+            temp.pop(-1)
+            temp = list(map(list, zip(*temp)))
+            meanAndvar = MeanAndVar(mat(temp))
+            self._weight.append(meanAndvar)
+
+    def predict(self, inputs):
+        if not isinstance(inputs, mat):
+            raise TypeError("类型得是mat，_(:з」∠)_")
+        data = copy.deepcopy(inputs)
+        # 计算矩阵内部数值
+        res = []
+        for k in range(data.row):
+            weight = [[Gaussian(self._weight[i][j], data.mat[k][j])
+                for j in range(len(self._weight[0]))]for i in range(len(self._weight))]
+            score = map(lambda x:math.exp(math.log(sum(x))), weight)
+            self._score = list(zip(self._class, score))
+            value = list(map(list, self._score))
+            value.sort(key=lambda x: x[1],reverse=True)
+            res.append(list(value[0][0]))
+        return res
+
 class BPNN(Model):
-    def __init__(self, ni, nh, no, active="tanh", iterations=5000, learnRate=0.001, B=0.002):
+    def __init__(self, ni, nh, no, active="tanh", iterations=5000, learnRate=0.01, B=0.02):
         # 调用父类赋值模型类型
         super(BPNN, self).__init__(modelType["BpClassification"], iterations)
         # self._type = modelType["BpClassification"]
@@ -60,17 +119,7 @@ class BPNN(Model):
         return res
 
     def fit(self, inputs, outputs, bias=False, info=True, show=True):
-        if not (isinstance(inputs, mat) and isinstance(outputs, mat)):
-            raise TypeError("输入参数必须为mat类型")
-        if bias:
-            ones = m.fillMat((len(inputs.mat), 1), fill=1)
-            i = copy.deepcopy(m.column_stack(inputs, ones))
-        else:
-            i = copy.deepcopy(inputs)
-        o = copy.deepcopy(outputs)
-        self._inputs = i.mat
-        self._outputs= o.mat
-        self.irow = i.row
+        super(BPNN, self).fit(inputs, outputs, bias)
         if info:
             self.__train()
         if show:
@@ -196,26 +245,30 @@ class BPNN(Model):
             ah = mat([list(map(self.active, i)) for i in xwi])
             xwiwo = m.dot(ah, mat(self.wo)).mat
             ao = mat([list(map(self.active, i)) for i in xwiwo])
-            return xwiwo
+            return ao
 
 
 if __name__ == '__main__':
-
-    # 先创建特征矩阵，默认规范化（数值在0-1之间）
-    data_X = m.random.rand((100, 8))
-    # data_X = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
-
-    # 创建特征的标签向量
-    data_y = m.random.rand((100, 1))
-    # data_y = [[0], [1], [0], [1], [1], [1], [1]]
-
-    # 创建BP实例，输入矩阵列8， 隐含层矩阵列10， 输出层列1， 迭代次数5000， 梯度步长0.4， 修正参数0.2
-    nn = BPNN(8, 6, 1, active="tanh", iterations=5000, learnRate=0.01, B=0.02)
-    # 填充特征矩阵和标签， info表示是否显示迭代过程， show表示是否显示误差图像， bias偏置（为True，输入矩阵列需要加1）
-    nn.fit(mat(data_X), mat(data_y), info=True, show=True, bias=False)
-    # 存储权重矩阵，在weights文件夹下（需要pandas库）
-    nn.saveWeights()
-    # 显示算法基本信息
-    print(nn)
-    # 进行预测，如果Debug为True，则用到了numpy，否则则是自己写的
-    print(nn.predict(m.random.rand((20, 8)), Debug=False))
+    # region BP测试
+    # # 先创建特征矩阵，默认规范化（数值在0-1之间）
+    # data_X = m.random.rand((100, 8))
+    # # data_X = [[0, 0, 0], [0, 0, 1], [0, 1, 0], [0, 1, 1], [1, 0, 1], [1, 1, 0], [1, 1, 1]]
+    #
+    # # 创建特征的标签向量
+    # data_y = m.random.rand((100, 1))
+    # # data_y = [[0], [1], [0], [1], [1], [1], [1]]
+    #
+    # # 创建BP实例，输入矩阵列8， 隐含层矩阵列10， 输出层列1， 迭代次数5000， 梯度步长0.4， 修正参数0.2
+    # nn = BPNN(8, 6, 1, active="tanh", iterations=5000, learnRate=0.01, B=0.02)
+    # # 填充特征矩阵和标签， info表示是否显示迭代过程， show表示是否显示误差图像， bias偏置（为True，输入矩阵列需要加1）
+    # nn.fit(mat(data_X), mat(data_y), info=True, show=True, bias=False)
+    # # 存储权重矩阵，在weights文件夹下（需要pandas库）
+    # nn.saveWeights()
+    # # 显示算法基本信息
+    # print(nn)
+    # # 进行预测，如果Debug为True，则用到了numpy，否则则是自己写的
+    # print(nn.predict(m.random.rand((20, 8)), Debug=False))
+    # endregion
+    nb = NaiveBayes()
+    nb.fit(mat([[1,2,3], [2,3,4],[1,1,1],[2,2,3],[5,6,7],[1,2,-1],[1,0,1.5]]), mat([[1,2],[3,4],[3,4],[0,1],[1,2],[0,1],[-1,2]]))
+    print nb.predict(mat([[1,2,3],[2,3,4],[0,1,1], [5,6,7],[2,2,3],[1,2,-1]]))

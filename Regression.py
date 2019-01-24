@@ -77,17 +77,7 @@ class BPNN(Model):
         return res
 
     def fit(self, inputs, outputs, bias=False, info=True, show=True):
-        if not (isinstance(inputs, mat) and isinstance(outputs, mat)):
-            raise TypeError("输入参数必须为mat类型")
-        if bias:
-            ones = m.fillMat((len(inputs.mat), 1), fill=1)
-            i = copy.deepcopy(m.column_stack(inputs, ones))
-        else:
-            i = copy.deepcopy(inputs)
-        o = copy.deepcopy(outputs)
-        self._inputs = i.mat
-        self._outputs= o.mat
-        self.irow = i.row
+        super(BPNN, self).fit(inputs, outputs, bias)
         if info:
             self.__train()
         if show:

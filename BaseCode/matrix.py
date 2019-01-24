@@ -141,7 +141,6 @@ class mat:
         return mat(map(list, zip(*self.mat)))
 
     # 求行列式操作(这样调用：mat(a).det)
-    # TODO: 下次使用三角分解来求解
     @property
     def det(self):
         '''
@@ -156,7 +155,6 @@ class mat:
         return det
 
     # region 求逆操作
-    # TODO: 使用三角分解来完成
     @property
     def I(self):
         '''
@@ -322,66 +320,6 @@ class mat:
             return mat(I)
         else:
             raise TypeError, "必须是整数"
-
-    @staticmethod
-    def uptriangulation(matrix):
-        m_chushi = copy.deepcopy(matrix)
-        row = len(m_chushi)
-        col = len(m_chushi[0])
-        # tflag为转置标志，为0时，原矩阵未转置，唯1时原矩阵被转置，输出时需要变回来
-        tflag = 0
-        if row >= col:
-            m = m_chushi
-        else:
-            m = mat(m_chushi).T.mat
-            row = len(m_chushi[0])
-            col = len(m_chushi)
-            tflag = 1
-        # 以行大于等于列的情况下初等变换
-        # 首先找出全为0的列
-        colallzero = []
-        for j in range(col):
-            i = 0
-            while i < row:
-                if m[i][j] != 0:
-                    break
-                i += 1
-            if i == row:
-                colallzero.append[j]
-        # 全为0的列初等变换移到最后，越靠前的越靠后
-        if len(colallzero) == col:
-            print("0矩阵变换你妈")
-        else:
-            i = 0
-            for j in range(col - 1, col - len(colallzero) - 1, -1):
-                if j in colallzero:
-                    continue
-                else:
-                    m = swap(m, colallzero[i], j, 1)
-                    i += 1
-        # 换列后初等变换
-        for j in range(col - len(colallzero)):
-            k = j
-            # 找到每一列第一个不为0的值
-            while k < row:
-                if m[k][j] != 0:
-                    break
-                k += 1
-            if k != row:
-                rowchange = m[k]
-                m[k] = m[j]
-                m[j] = rowchange
-                for i in range(j + 1, row):
-                    elfac = float(m[i][j] / m[j][j])
-                    for l in range(j, col - len(colallzero)):
-                        m[i][l] = m[i][l] - elfac * m[j][l]
-            else:
-                continue
-
-        if tflag == 0:
-            return m
-        else:
-            return mat(m).T.mat
 
     @staticmethod
     def norm_1(matrix):
@@ -588,8 +526,81 @@ def swap(matrix, i, j, RowOrCol):
         if RowOrCol == 0:
             x[i], x[j] = x[j], x[i]
         elif RowOrCol == 1:
-            x[:][i], x[:][j] = x[:][j], x[:][i]
+            x = map(list, zip(*x))
+            x[i], x[j] = x[j], x[i]
+            x = map(list, zip(*x))
         return x
+
+def uptriangulation(matrix):
+    '''初等变换'''
+    m_chushi = copy.deepcopy(matrix)
+    row = len(m_chushi)
+    col = len(m_chushi[0])
+    # tflag为转置标志，为0时，原矩阵未转置，唯1时原矩阵被转置，输出时需要变回来
+    tflag = 0
+    if row >= col:
+        m = m_chushi
+    else:
+        m = mat(m_chushi).T.mat
+        row = len(m_chushi[0])
+        col = len(m_chushi)
+        tflag = 1
+    # 以行大于等于列的情况下初等变换
+    # 首先找出全为0的列
+    colallzero = []
+    for j in range(col):
+        i = 0
+        while i < row:
+            if m[i][j] != 0:
+                break
+            i += 1
+        if i == row:
+            colallzero.append[j]
+    # 全为0的列初等变换移到最后，越靠前的越靠后
+    if len(colallzero) == col:
+        print("0矩阵变换你妈")
+    else:
+        i = 0
+        for j in range(col - 1, col - len(colallzero) - 1, -1):
+            if j in colallzero:
+                continue
+            else:
+                m = swap(m, colallzero[i], j, 1)
+                i += 1
+    # 换列后初等变换
+    for j in range(col - len(colallzero)):
+        k = j
+        # 找到每一列第一个不为0的值
+        while k < row:
+            if m[k][j] != 0:
+                break
+            k += 1
+        if k != row:
+            rowchange = m[k]
+            m[k] = m[j]
+            m[j] = rowchange
+            for i in range(j + 1, row):
+                elfac = float(m[i][j] / m[j][j])
+                for l in range(j, col - len(colallzero)):
+                    m[i][l] = m[i][l] - elfac * m[j][l]
+        else:
+            continue
+
+    if tflag == 0:
+        return m
+    else:
+        return mat(m).T.mat
+
+def MeanAndVar(x):
+    '''返回矩阵每列均值和方差列表的元组'''
+    if not isinstance(x, mat):
+        raise TypeError("类型错误，我都嫌累了")
+    m = mat(copy.deepcopy(x)).T
+    mean = [i/float(m.col) for i in list(map(sum, m.mat))]
+    var = map(lambda x:x/float(m.col), [sum(map(lambda x:(x-mean[i])**2, m.mat[i]))
+           for i in range(m.row)])
+    # return mean, var、
+    return list(zip(mean, var))
 
 
 
@@ -613,9 +624,6 @@ if __name__ == '__main__':
     c = [[0.5, 1, 0], [2, 1.5, 1], [0.2, 1, 2.5]]
     d = [[2, 5, -6], [4, 13, -19], [-6, -3, -6], [2, 1, 2]]
     time_start = time.clock()
-    import numpy as np
-    print np.linalg.svd(a)
-
     # print(swap(b1, 0, 1, 1))
     # a = mat(x).I.T
     # print(a)

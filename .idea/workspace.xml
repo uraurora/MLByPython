@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BaseCode/Function.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaseCode/Function.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BaseCode/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaseCode/matrix.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseModel.py" beforeDir="false" afterPath="$PROJECT_DIR$/BaseModel.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Classification.py" beforeDir="false" afterPath="$PROJECT_DIR$/Classification.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Regression.py" beforeDir="false" afterPath="$PROJECT_DIR$/Regression.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weights/bpwi.csv" beforeDir="false" afterPath="$PROJECT_DIR$/weights/bpwi.csv" afterDir="false" />
@@ -17,15 +18,15 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/MyPythonPackage$Classification.coverage" NAME="Classification Coverage Results" MODIFIED="1548067664726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/MyPythonPackage$Classification.coverage" NAME="Classification Coverage Results" MODIFIED="1548327806945" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$test.coverage" NAME="test Coverage Results" MODIFIED="1547387082470" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$matrix.coverage" NAME="matrix Coverage Results" MODIFIED="1547599538786" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$bpnn.coverage" NAME="bpnn Coverage Results" MODIFIED="1547387351572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="E:/python/bpnn-master" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$profiler.coverage" NAME="profiler Coverage Results" MODIFIED="1547120597756" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$BPNN.coverage" NAME="BPNN Coverage Results" MODIFIED="1547388041018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="E:/python/classification-master" />
-    <SUITE FILE_PATH="coverage/MyPythonPackage$matrix__1_.coverage" NAME="matrix (1) Coverage Results" MODIFIED="1548063192658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BaseCode" />
+    <SUITE FILE_PATH="coverage/MyPythonPackage$matrix__1_.coverage" NAME="matrix (1) Coverage Results" MODIFIED="1548324047472" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BaseCode" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$Regression.coverage" NAME="Regression Coverage Results" MODIFIED="1548067775618" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/MyPythonPackage$Function.coverage" NAME="Function Coverage Results" MODIFIED="1548068839927" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BaseCode" />
+    <SUITE FILE_PATH="coverage/MyPythonPackage$Function.coverage" NAME="Function Coverage Results" MODIFIED="1548324968359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BaseCode" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$figure__1_.coverage" NAME="figure (1) Coverage Results" MODIFIED="1547608505418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/BaseCode" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$Neuron.coverage" NAME="Neuron Coverage Results" MODIFIED="1547388168851" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="E:/python/Neural_NetWork-master" />
     <SUITE FILE_PATH="coverage/MyPythonPackage$figure.coverage" NAME="figure Coverage Results" MODIFIED="1547454386193" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
@@ -207,20 +208,23 @@
     <session id="1393594510">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.12" value="1" />
-          <entry key="project.opened" value="2" />
+          <entry key="project.open.time.12" value="3" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="505" />
+          <entry key="py" value="4438" />
+          <entry key="txt" value="24" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="505" />
+          <entry key="PLAIN_TEXT" value="24" />
+          <entry key="Python" value="4438" />
         </counts>
       </usages-collector>
     </session>
@@ -230,11 +234,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Regression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="224" column="15" selection-start-line="224" selection-start-column="15" selection-end-line="224" selection-end-column="15" />
+            <state relative-caret-position="184">
+              <caret line="84" column="16" lean-forward="true" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
               <folding>
                 <element signature="e#404#1094#0" />
               </folding>
@@ -257,23 +261,35 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BaseCode/Function.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="299">
+              <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
               <folding>
+                <element signature="e#103#121#0" expanded="true" />
                 <element signature="e#172#184#0" />
-                <marker date="1548068971279" expanded="true" signature="851:936" ph="..." />
+                <marker date="1548327803156" expanded="true" signature="897:982" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Classification.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+            <state relative-caret-position="187">
+              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
               <folding>
                 <element signature="e#113#149#0" expanded="true" />
+                <element signature="e#354#2568#0" />
+                <element signature="e#531#937#0" />
+                <element signature="e#649#900#0" />
+                <element signature="e#2375#8310#0" />
+                <element signature="e#617#1491#0" />
+                <element signature="e#1524#1930#0" />
+                <element signature="e#2764#3301#0" />
+                <element signature="e#3341#4627#0" />
+                <element signature="e#4660#5029#0" />
+                <marker date="1548327844115" expanded="false" signature="924:1246" ph="..." />
+                <marker date="1548327844115" expanded="true" signature="1939:1940" ph="..." />
               </folding>
             </state>
           </provider>
@@ -282,16 +298,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BaseCode/matrix.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8717">
-              <caret line="596" column="3" selection-start-line="596" selection-start-column="3" selection-end-line="596" selection-end-column="3" />
+            <state relative-caret-position="184">
+              <caret line="625" column="29" selection-start-line="625" selection-start-column="29" selection-end-line="625" selection-end-column="29" />
               <folding>
                 <element signature="e#1080#1091#0" expanded="true" />
                 <element signature="e#1892#2441#0" />
                 <element signature="e#2492#3041#0" />
                 <element signature="e#3120#3662#0" />
-                <element signature="e#3685#3698#0" />
                 <element signature="e#3764#4111#0" />
                 <element signature="e#4208#4456#0" />
+                <element signature="e#4462#4475#0" />
                 <element signature="e#4537#5571#0" />
                 <element signature="e#5668#7076#0" />
                 <element signature="e#7118#7209#0" />
@@ -301,6 +317,20 @@
                 <element signature="e#7992#8135#0" />
                 <element signature="e#8193#8324#0" />
                 <element signature="e#8377#8593#0" />
+                <element signature="e#8616#8628#0" />
+                <element signature="e#8672#9020#0" />
+                <element signature="e#10823#11159#0" />
+                <element signature="e#11213#11551#0" />
+                <element signature="e#11613#12969#0" />
+                <element signature="e#12437#12947#0" />
+                <element signature="e#13004#13775#0" />
+                <element signature="e#13854#14537#0" />
+                <element signature="e#14564#14921#0" />
+                <element signature="e#14957#15016#0" />
+                <element signature="e#15057#15635#0" />
+                <element signature="e#15673#16171#0" />
+                <element signature="e#16211#16569#0" />
+                <element signature="e#14874#16344#0" />
               </folding>
             </state>
           </provider>
@@ -309,8 +339,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BaseModel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="943">
-              <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="17" />
+            <state relative-caret-position="353">
+              <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+              <folding>
+                <element signature="e#118#147#0" expanded="true" />
+                <element signature="e#219#277#0" />
+                <element signature="e#310#504#0" />
+                <element signature="e#609#613#0" />
+                <element signature="e#650#654#0" />
+                <element signature="e#690#694#0" />
+                <element signature="e#727#731#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -326,7 +365,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>print</find>
       <find>dot</find>
       <find>flowerLables</find>
       <find>layers</find>
@@ -336,6 +374,7 @@
       <find>swap</find>
       <find>mat</find>
       <find>ErrorPlot</find>
+      <find>print</find>
     </findStrings>
     <replaceStrings>
       <replace>TyepError</replace>
@@ -355,11 +394,11 @@
       <list>
         <option value="$PROJECT_DIR$/matrix.py" />
         <option value="$PROJECT_DIR$/BaseCode/__init__.py" />
+        <option value="$PROJECT_DIR$/Regression.py" />
         <option value="$PROJECT_DIR$/BaseModel.py" />
         <option value="$PROJECT_DIR$/BaseCode/matrix.py" />
-        <option value="$PROJECT_DIR$/Regression.py" />
-        <option value="$PROJECT_DIR$/Classification.py" />
         <option value="$PROJECT_DIR$/BaseCode/Function.py" />
+        <option value="$PROJECT_DIR$/Classification.py" />
       </list>
     </option>
   </component>
@@ -384,6 +423,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -400,7 +440,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -428,7 +467,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Function">
+  <component name="RunManager" selected="Python.Classification">
     <configuration name="Classification" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="MyPythonPackage" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -570,10 +609,10 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Function" />
-        <item itemvalue="Python.Regression" />
         <item itemvalue="Python.Classification" />
+        <item itemvalue="Python.Function" />
         <item itemvalue="Python.matrix (1)" />
+        <item itemvalue="Python.Regression" />
         <item itemvalue="Python.figure (1)" />
       </list>
     </recent_temporary>
@@ -596,25 +635,33 @@
       <option name="project" value="LOCAL" />
       <updated>1547641869579</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="增加了bpnn的回归和分类">
+      <created>1548069636919</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1548069636919</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17430703" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13113007" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3779264" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49946696" visible="true" weight="0.35451505" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4671126" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.32962137" />
       <window_info anchor="bottom" id="Changes" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50053304" side_tool="true" weight="0.3556299" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="12" />
@@ -623,7 +670,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="right" id="SciView" order="4" visible="true" weight="0.23987207" />
+      <window_info anchor="right" id="SciView" order="4" visible="true" weight="0.13539445" />
       <window_info anchor="right" id="R Graphics" order="5" />
       <window_info anchor="right" id="R Packages" order="6" />
     </layout>
@@ -639,7 +686,8 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
     <option name="USE_COMMIT_MESSAGE_MARGIN" value="false" />
     <MESSAGE value="朴素贝叶斯分类类初步" />
-    <option name="LAST_COMMIT_MESSAGE" value="朴素贝叶斯分类类初步" />
+    <MESSAGE value="增加了bpnn的回归和分类" />
+    <option name="LAST_COMMIT_MESSAGE" value="增加了bpnn的回归和分类" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -685,29 +733,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BaseCode/Function.py">
+    <entry file="file://$PROJECT_DIR$/Regression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="184">
+          <caret line="84" column="16" lean-forward="true" selection-start-line="84" selection-start-column="16" selection-end-line="84" selection-end-column="16" />
           <folding>
-            <element signature="e#172#184#0" />
-            <marker date="1548068971279" expanded="true" signature="851:936" ph="..." />
+            <element signature="e#404#1094#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BaseModel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+          <folding>
+            <element signature="e#118#147#0" expanded="true" />
+            <element signature="e#219#277#0" />
+            <element signature="e#310#504#0" />
+            <element signature="e#609#613#0" />
+            <element signature="e#650#654#0" />
+            <element signature="e#690#694#0" />
+            <element signature="e#727#731#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BaseCode/matrix.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8717">
-          <caret line="596" column="3" selection-start-line="596" selection-start-column="3" selection-end-line="596" selection-end-column="3" />
+        <state relative-caret-position="184">
+          <caret line="625" column="29" selection-start-line="625" selection-start-column="29" selection-end-line="625" selection-end-column="29" />
           <folding>
             <element signature="e#1080#1091#0" expanded="true" />
             <element signature="e#1892#2441#0" />
             <element signature="e#2492#3041#0" />
             <element signature="e#3120#3662#0" />
-            <element signature="e#3685#3698#0" />
             <element signature="e#3764#4111#0" />
             <element signature="e#4208#4456#0" />
+            <element signature="e#4462#4475#0" />
             <element signature="e#4537#5571#0" />
             <element signature="e#5668#7076#0" />
             <element signature="e#7118#7209#0" />
@@ -717,33 +780,53 @@
             <element signature="e#7992#8135#0" />
             <element signature="e#8193#8324#0" />
             <element signature="e#8377#8593#0" />
+            <element signature="e#8616#8628#0" />
+            <element signature="e#8672#9020#0" />
+            <element signature="e#10823#11159#0" />
+            <element signature="e#11213#11551#0" />
+            <element signature="e#11613#12969#0" />
+            <element signature="e#12437#12947#0" />
+            <element signature="e#13004#13775#0" />
+            <element signature="e#13854#14537#0" />
+            <element signature="e#14564#14921#0" />
+            <element signature="e#14957#15016#0" />
+            <element signature="e#15057#15635#0" />
+            <element signature="e#15673#16171#0" />
+            <element signature="e#16211#16569#0" />
+            <element signature="e#14874#16344#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BaseModel.py">
+    <entry file="file://$PROJECT_DIR$/BaseCode/Function.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="41" column="5" selection-start-line="41" selection-start-column="5" selection-end-line="41" selection-end-column="17" />
+        <state relative-caret-position="299">
+          <caret line="62" column="19" selection-start-line="62" selection-start-column="19" selection-end-line="62" selection-end-column="19" />
+          <folding>
+            <element signature="e#103#121#0" expanded="true" />
+            <element signature="e#172#184#0" />
+            <marker date="1548327803156" expanded="true" signature="897:982" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Classification.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="198" column="24" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+        <state relative-caret-position="187">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
           <folding>
             <element signature="e#113#149#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Regression.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="224" column="15" selection-start-line="224" selection-start-column="15" selection-end-line="224" selection-end-column="15" />
-          <folding>
-            <element signature="e#404#1094#0" />
+            <element signature="e#354#2568#0" />
+            <element signature="e#531#937#0" />
+            <element signature="e#649#900#0" />
+            <element signature="e#2375#8310#0" />
+            <element signature="e#617#1491#0" />
+            <element signature="e#1524#1930#0" />
+            <element signature="e#2764#3301#0" />
+            <element signature="e#3341#4627#0" />
+            <element signature="e#4660#5029#0" />
+            <marker date="1548327844115" expanded="false" signature="924:1246" ph="..." />
+            <marker date="1548327844115" expanded="true" signature="1939:1940" ph="..." />
           </folding>
         </state>
       </provider>

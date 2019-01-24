@@ -57,8 +57,10 @@ funDiffDict = {
 
 # region统计函数
 # 高斯分布函数
-def Gaussian(u, o, x):
+def Gaussian(t, x):
+    u, o = t
+    if o == 0:
+        return 0.001
     return float(math.exp(float(-(x - u)**2)/(2 * o**2)))/(math.sqrt(2*math.pi)*o)
 
 # endregion
-
