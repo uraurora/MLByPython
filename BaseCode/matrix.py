@@ -602,6 +602,108 @@ def MeanAndVar(x):
     # return mean, var、
     return list(zip(mean, var))
 
+def MaxAndMin(x):
+    '''返回矩阵每一列最大值最小值元组的列表'''
+    if not isinstance(x, mat):
+        raise TypeError("类型错误，我都嫌累了")
+    m = mat(copy.deepcopy(x)).T
+    return [(max(i), min(i)) for i in m.mat]
+
+# region奇异值和对称矩阵的特征值
+def searchMaxelement(matrix):
+    m = copy.deepcopy(matrix)
+    row = len(m)
+    extremum = list(map(max, m)) + list(map(min, m))
+    absExtremum = list(map(abs, extremum))
+    rowplace = absExtremum.index(max(absExtremum))
+    maxZhi = extremum[rowplace]
+    if rowplace <= row-1:
+        rowindex = rowplace
+    else:
+        rowindex = rowplace - row
+    colindex = m[rowindex].index(maxZhi)
+    return [maxZhi,rowindex,colindex]
+    '''
+    矩阵返回除对角元素外绝对值最大的元素及其下标，专用于特征值求解
+    '''
+def searchMaxelement1(matrix):
+    m = copy.deepcopy(matrix)
+    n = len(m)
+    for i in range(n):
+        m[i][i] = 0
+    return searchMaxelement(m)
+
+# 雅可比迭代求特征值
+def tezhenzhi(matrix):
+    m = mat(copy.deepcopy(matrix))
+    if m.col != m.row:
+        raise TypeError("求特征值必须是方阵!")
+    else:
+        Rmat = []
+        count = 0
+        while 1:
+            [absmax, p, q] = searchMaxelement1(m.mat)
+            if abs(absmax)<=0.1:
+                break
+            s = float((m.mat[p][p] - m.mat[q][q])/(2*m.mat[p][q]))
+            if s == 0:
+                t = 1
+            elif s > 0:
+                t = (s**2 + 1)**0.5 - s
+            else:
+                t = - (s**2 + 1)**0.5 - s
+            c = (1 + t**2)**(-0.5)
+            d = t * c
+            R = mat.ones(m.row)
+            R.mat[p][p]  = c
+            R.mat[q][q] = c
+            R.mat[q][p] = d
+            R.mat[p][q] = -d
+            m = dot(R.T, m, R)
+            Rmat.append(R)
+            count+=1
+        Rres = mat.ones(m.row)
+        properValue = [[m.mat[i][i]] for i in range(m.row)]
+        print(properValue)
+        for i in range(len(Rmat)):
+            Rres = dot(Rres,Rmat[i])
+        c = list(zip(properValue,Rres.T.mat))
+        c.sort(key=lambda x:x[0], reverse=True)
+        return c
+
+def qiyizhi(matrix):
+    m = mat(copy.deepcopy(matrix))
+    temp = dot(m.T,m).mat
+    res = tezhenzhi(temp)
+    #得到西格玛的平方和右奇异矩阵和秩
+    i = 0
+    xigema2 = []
+    V1t = []
+    rightQiyiT = []
+    while i < len(res):
+        if res[i][0][0] < 0:
+            res[i][0][0] = abs(res[i][0][0])
+        xigema2.append(res[i][0][0])
+        rightQiyiT.append(res[i][1])
+        if res[i][0][0] > 0.01:
+            # res[i][0][0] = abs(res[i][0][0])
+            V1t.append(res[i][1])
+            r = i + 1
+        i += 1
+    rightQiyi = mat(rightQiyiT).T
+    #得到求U1所需的V1和西格玛的逆
+    V1 = mat(V1t).T
+    xigema = map(math.sqrt, xigema2)
+    xigemani = map(lambda x: float(1/x),xigema)
+    matxigema = mat.ones(r)
+    matxigemani = mat.ones(r)
+    for i in range(r):
+        matxigema.mat[i][i] = xigema[i]
+        matxigemani.mat[i][i] = xigemani[i]
+    #求U1
+    # U1 = dot(m, V1, matxigemani)
+    return matxigema
+#endregion
 
 
 
@@ -623,7 +725,11 @@ if __name__ == '__main__':
     b2 = [[3, 6, 9, 3, 1], [2, 3, 4, 1, 1], [2, 1, 2, 5, 2], [2, 3, 1, 8, 4], [3, 6, 9, 3, 8]]
     c = [[0.5, 1, 0], [2, 1.5, 1], [0.2, 1, 2.5]]
     d = [[2, 5, -6], [4, 13, -19], [-6, -3, -6], [2, 1, 2]]
+    e = random.rand((100, 50))
+    # e = mat([[4,2,2], [2,1,11], [2,11,40]])
     time_start = time.clock()
+    print(qiyizhi(dot(e.T, e)))
+
     # print(swap(b1, 0, 1, 1))
     # a = mat(x).I.T
     # print(a)

@@ -72,7 +72,11 @@ class NaiveBayes(Model):
         for k in range(data.row):
             weight = [[Gaussian(self._weight[i][j], data.mat[k][j])
                 for j in range(len(self._weight[0]))]for i in range(len(self._weight))]
-            score = map(lambda x:math.exp(math.log(sum(x))), weight)
+            # 计算概率
+            score = []
+            for i in weight:
+                temp = map(math.log, i)
+                score.append(math.exp(sum(temp)))
             self._score = list(zip(self._class, score))
             value = list(map(list, self._score))
             value.sort(key=lambda x: x[1],reverse=True)
@@ -271,4 +275,4 @@ if __name__ == '__main__':
     # endregion
     nb = NaiveBayes()
     nb.fit(mat([[1,2,3], [2,3,4],[1,1,1],[2,2,3],[5,6,7],[1,2,-1],[1,0,1.5]]), mat([[1,2],[3,4],[3,4],[0,1],[1,2],[0,1],[-1,2]]))
-    print nb.predict(mat([[1,2,3],[2,3,4],[0,1,1], [5,6,7],[2,2,3],[1,2,-1]]))
+    print nb.predict(mat([[1,2,3],[2,3,4],[0,1,1], [5,6,7],[2,2,3],[1,0,1.5]]))
