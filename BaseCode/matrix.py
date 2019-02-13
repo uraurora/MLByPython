@@ -74,6 +74,13 @@ class mat:
     def __str__(self):
         return "shape:" + str(self.shape) + ",data:" + str(self.mat)
 
+    def __iter__(self):
+        '''迭代器，可以直接对mat类型数据操作'''
+        cursor = 0
+        while cursor < self.row:
+            yield self.mat[cursor]
+            cursor += 1
+
     # TODO:连加矩阵未追加判断
     def __add__(self, other, *mat_else):
         if not isinstance(other, mat):
@@ -725,7 +732,7 @@ if __name__ == '__main__':
     b2 = [[3, 6, 9, 3, 1], [2, 3, 4, 1, 1], [2, 1, 2, 5, 2], [2, 3, 1, 8, 4], [3, 6, 9, 3, 8]]
     c = [[0.5, 1, 0], [2, 1.5, 1], [0.2, 1, 2.5]]
     d = [[2, 5, -6], [4, 13, -19], [-6, -3, -6], [2, 1, 2]]
-    e = random.rand((100, 50))
+    e = random.rand((100, 20))
     # e = mat([[4,2,2], [2,1,11], [2,11,40]])
     time_start = time.clock()
     print(qiyizhi(dot(e.T, e)))
