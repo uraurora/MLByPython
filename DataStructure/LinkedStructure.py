@@ -24,27 +24,46 @@ class LinkedList(object):
     }
 
     '''链表结构'''
-    def __init__(self, type=1, length=10, filldata=None):
+    def __init__(self, type=1, length=10, filldata=None, dataSource=None):
+        '''
+        创建初始链表
+        :param type: 链表类型，1：单向，2：双向
+        :param length: 链表长度
+        :param filldata: 填入的数据（每个都相同）
+        :param dataSource: 填入的数据源
+        '''
         if type == 1:
             self.type = "1"
             self.head = None
-            for i in range(length):
-                self.head = Node(i, self.head)
+            if dataSource != None:
+                for i in dataSource:
+                    self.head = Node(i, self.head)
+            else:
+                for i in range(length):
+                    self.head = Node(i, self.head)
         elif type == 2:
             self.type = "2"
             self.head = TwoWayNode(None)
             self.tail = self.head
-            for i in range(1, length):
-                self.tail.next = TwoWayNode(i, self.tail)
-                self.tail = self.tail.next
+            if dataSource != None:
+                for i in dataSource:
+                    self.tail.next = TwoWayNode(i, self.tail)
+                    self.tail = self.tail.next
+            else:
+                for i in range(1, length):
+                    self.tail.next = TwoWayNode(i, self.tail)
+                    self.tail = self.tail.next
         else:
             raise ValueError("节点类型错误，填1/单向或2/双向")
 
     def __iter__(self):
         probe = self.head
-        while probe != None:
-            yield probe.data
+        while probe.next != None:
             probe = probe.next
+            yield probe.data
+
+    def __str__(self):
+        return str(self.tolist())
 
     def __len__(self):
         probe = self.head
@@ -75,8 +94,6 @@ class LinkedList(object):
             self.tail.next = None
         return removedata
 
-
-
     def replace(self, index, newdata):
         '''替换指定位置的data值'''
         probe = self.head
@@ -100,6 +117,9 @@ class LinkedList(object):
                     index -= 1
                 probe.next = self.node[self.type](newdata, probe.next)
             elif self.type == "2":
+                if index > len(self):
+                    self.tail.next = self.node[self.type](newdata, self.tail, self.tail.next)
+                    self.tail = self.tail.next
                 probe = self.head
                 while probe.next != None and index > 1:
                     probe = probe.next
@@ -113,8 +133,37 @@ class LinkedList(object):
         return targetList
 
 class CircularList(object):
-    def __init__(self):
-        pass
+    def __init__(self, length=10, filldata=None, dataSource=None):
+        self.head = Node(None, None)
+        self.head.next = self.head
+        if dataSource != None:
+            for i in dataSource:
+                self.insert(1, i)
+        else:
+            for i in range(length):
+                self.insert(1, filldata)
+
+    def __iter__(self):
+        probe = self.head
+        while probe.next != self.head:
+            probe = probe.next
+            yield probe.data
+
+    def tolist(self):
+        targetList = list()
+        for i in self:
+            targetList.append(i)
+        return targetList
+
+    def __str__(self):
+        return str(self.tolist())
+
+    def insert(self, index, newdata):
+        probe = self.head
+        while probe.next != self.head and index > 1:
+            probe = probe.next
+            index -= 1
+        probe.next = Node(newdata, probe.next)
 
 
 
@@ -139,6 +188,12 @@ if __name__ == '__main__':
     # while probe != None:
     #     print probe.data
     #     probe = probe.previous
-    a = LinkedList(type=2)
+    a = LinkedList(type=2,dataSource=[1,4,6,7])
+    a.insert(2,18)
     for i in a:
         print i
+    b = CircularList(dataSource=[1,2,4,5])
+    b.insert(2,18)
+    for i in b:
+        print i
+
