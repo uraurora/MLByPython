@@ -66,3 +66,4 @@ if __name__ == '__main__':
     print Scaler.StandardScaler(a).shape
     print Scaler.Normalizer(a).shape
     print Scaler.MinMaxScaler(a).shape
+	print "hello world"
